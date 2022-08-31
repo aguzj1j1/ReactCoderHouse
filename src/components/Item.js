@@ -1,20 +1,19 @@
-import { Card,Button } from 'react-daisyui'
-const Item = () => {
+import { Card, Button } from 'react-daisyui'
+const Item = ({ src, title, description, price }) => {
+  // debugger;
   return (
     <>
-    <Card>
-      <Card.Image
-        src="https://api.lorem.space/image/shoes?w=400&h=225"
-        alt="Shoes"
-      />
-      <Card.Body className="items-center text-center">
-        <Card.Title tag="h2">Shoes!</Card.Title>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <Card.Actions className="justify-end">
-          <Button color="primary">Buy Now</Button>
-        </Card.Actions>
-      </Card.Body>
-    </Card>
+      <Card>
+        <Card.Image src={src} alt="Shoes" className='object-contain h-48 w-96' />
+          <Card.Body className="items-center text-center">
+            <Card.Title tag="h2">{title}</Card.Title>
+            <p>{description}</p>
+            <Card.Title tag="h3">{price}$</Card.Title>
+            <Card.Actions className="justify-end">
+              <Button color="primary">Comprar</Button>
+            </Card.Actions>
+          </Card.Body>
+      </Card>
     </>
   )
 }

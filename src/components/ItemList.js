@@ -1,27 +1,35 @@
 import { useEffect, useState } from "react"
 import Item from "./Item"
-
+import json from "../data/data.json"
 const ItemList = () => {
     const [items, setItems] = useState([]);
-    const getProducts = async () => {
-        debugger;
-         fetch('../data/data.json')
-                .then(response => response.json())
-                .then((data) => {
-                    debugger;
-                    return data;
-                });
-        return new Promise(async (resolve, reject) => {
-            
 
-        })
-    }
     useEffect(() => {
-       
-        getProducts()
-    })
+        const getProducts = () => {
+            const products = JSON.parse(JSON.stringify(json))
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    products.length > 0 ? resolve(products) : reject("no se pudo cargar los productos")
+                }, 2000);
+            })
+        }
+        getProducts().then((products) => {
+            setItems(products)
+            console.log(items)
+        }).catch(() => {
+            console.log("fallo la promesa")
+        })
+    }, items)
     return (
-        <Item></Item>
+        <>
+            <div class="flex flex-wrap">
+                {items.length ? (
+                    items.map((item) => <div><Item key={item.idProducto} {...item} /> </div>)
+                ) : (
+                    <h2>Cargando...</h2>
+                )}
+            </div>
+        </>
     )
 }
 
