@@ -8,7 +8,7 @@ function App() {
     <>
       <NavBar />
       <ItemListContainer name={"CoderHouse"} />
-      <ItemList/>
+      
     </>
   );
 }
