@@ -1,0 +1,32 @@
+#form {
+    width: 250px;
+    /* margin: 0 auto; */
+    height: 50px;
+  }
+  
+  #form p {
+    text-align: center;
+  }
+  
+  #form label {
+    font-size: 20px;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  label {
+    color: grey;
+  }
+  
+  
+  label:hover,
+  label:hover ~ label {
+    color: rgb(52 131 250);
+    direction: ltr !important;
+  }
+  
+  input[type="radio"]:checked ~ label {
+    color: rgb(52 131 250);
+  }
