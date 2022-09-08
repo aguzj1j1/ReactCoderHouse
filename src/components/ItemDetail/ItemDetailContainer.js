@@ -5,7 +5,7 @@ const ItemDetailContainer = () => {
   return (
     <>
     
-      <div className="container mx-auto px-28">
+      <div className="container mx-auto px-28 ">
         <ItemDetail />
       </div>
     </>

@@ -12,9 +12,9 @@ const ItemCount = ({stock}) => {
     <>
     <div className='content-center'>
         <div className='flex flex-row'>
-            <div><Button disabled={amount===1} onClick={subtractProduct}>-</Button></div>
+            <div><button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  px-4 rounded-l' disabled={amount===1} onClick={subtractProduct}>-</button></div>
             <div><p> {amount}</p></div>
-            <div><Button disabled={amount===stock} onClick={addProduct}>+</Button></div>
+            <div><button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  px-4 rounded-l' disabled={amount===stock} onClick={addProduct}>+</button></div>
         </div>
     </div>
     </>

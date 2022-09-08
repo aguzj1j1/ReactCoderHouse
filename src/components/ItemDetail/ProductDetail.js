@@ -1,7 +1,7 @@
 import React from 'react'
 import './ItemDetail.css'
-const ProductDetail = () => {
-    let details = ["prueba1","prueba2","prueba3"]
+const ProductDetail = ({details}) => {
+    
     let i = 0
     const listItems = details.map((detail,index)=>
 

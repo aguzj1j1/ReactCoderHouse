@@ -8,7 +8,7 @@ export function ImageList({
     onScrollEnd
 }) {
     const container = useRef(null);
-
+    let imageActual = [];
     return (
         <div
             onScroll={e => {
@@ -21,10 +21,13 @@ export function ImageList({
                 }
             }}
             ref={container}
-            className="flex flex-col bg-white py-3 border-t border-gray-200 overflow-x-auto"
+            className="flex flex-col bg-white py-3  overflow-x-auto"
         >
             {images.map((item, i) => {
-                if (i < 6) {
+                
+                debugger
+                if (!imageActual.includes(item)) {
+                    imageActual.push(item);
                     return (
                         <ImageThumbNail
                             image={item}
@@ -36,6 +39,7 @@ export function ImageList({
                         />
                     );
                 }
+
             })}
         </div>
     );

@@ -1,21 +1,29 @@
 import { Card, Button } from 'react-daisyui'
 import ItemCount from './ItemCount'
-const Item = ({ src, title, description, price,stock,idProducto }) => {
-  // debugger;
+import { Link } from 'react-router-dom'
+const Item = ({ src, title, description, price, stock, idProducto }) => {
   return (
     <>
+
       <Card>
-        <Card.Image src={src} alt="Shoes" className='object-contain h-48 w-96' />
-          <Card.Body className="items-center text-center">
+        <Link to={`/product/${idProducto}`}>
+          <Card.Image src={src[0]} alt="Shoes" className='object-contain h-48 w-96' />
+        </Link>
+        <Card.Body className="items-center text-center">
+          <Link to={`/product/${idProducto}`}>
             <Card.Title tag="h2">{title}</Card.Title>
             <p>{description}</p>
-            <Card.Title tag="h3">{price}$</Card.Title>
-            <ItemCount key={idProducto} stock={stock}></ItemCount>
-            <Card.Actions className="justify-end">
-              <Button color="primary">Comprar</Button>
-            </Card.Actions>
-          </Card.Body>
+          </Link>
+          <Card.Title tag="h3">{price}$</Card.Title>
+
+          <Card.Actions className="justify-end">
+            <Link to={`/product/${idProducto}`}>
+              <Button color="primary">Ver producto</Button>
+            </Link>
+          </Card.Actions>
+        </Card.Body>
       </Card>
+
     </>
   )
 }

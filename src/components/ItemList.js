@@ -19,12 +19,12 @@ const ItemList = () => {
         }).catch(() => {
             console.log("fallo la promesa")
         })
-    }, items)
+    }, [])
     return (
         <>
             <div className="flex flex-wrap">
                 {items.length ? (
-                    items.map((item) => <div><Item key={item.idProducto} {...item} /> </div>)
+                    items.map((item) => <div className="mt-5"><Item key={item.idProducto} {...item} /> </div>)
                 ) : (
                     <h2>Cargando...</h2>
                 )}

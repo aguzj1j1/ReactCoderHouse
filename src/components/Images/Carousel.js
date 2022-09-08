@@ -16,9 +16,9 @@ export function Carousel({ images, activeIndex }) {
                     }}
                 >
                     {images.map((item, i) => {
-                        if (i < 6) {
+                        // if (i < 6) {
                             return <CarouselSlide image={item} key={i + '-slide'} />;
-                        }
+                        // }
                     })}
                 </div>
             </div>
