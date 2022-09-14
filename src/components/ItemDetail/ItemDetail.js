@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './ItemDetail.css'
 import { Carousel } from '../Images/Carousel';
 import { ImageList } from '../Images/ImageList';
@@ -7,29 +7,26 @@ import ProductDetail from './ProductDetail';
 import json from "../../data/data.json"
 import { useParams } from 'react-router-dom';
 import ItemCount from '../ItemCount';
+import { CartContext } from '../../context/CartContext';
 const ItemDetail = () => {
   const [initialLoad, setInitialLoad] = useState(true);
   const [loadingImages, setLoadingImages] = useState(false);
   const [product, setProduct] = useState();
-  // last page that was loaded
   const [currentPage, setCurrentPage] = useState(null);
-  // total amount of pages that can be loaded
   const [totalPages, setTotalPages] = useState(null);
-
-  //all the images that have currently been loaded / fetched
   const [images, setImages] = useState([]);
-  // shows which image is currently selected and fullsize
   const [activeIndex, setActiveIndex] = useState(0);
-  const {productId} = useParams();
+  const { productId } = useParams();
+  const { addProduct } = useContext(CartContext)
   useEffect(() => {
     getProductById().then((products) => {
       let actualProduct = products.filter(product => product.idProducto == productId)[0];
       setProduct(actualProduct)
-      fetchPhotos(1,actualProduct.src,actualProduct.src)
+      fetchPhotos(1, actualProduct.src, actualProduct.src)
     }).catch(() => {
       console.log("fallo la promesa")
     })
-    
+
   }, []);
 
   const getProductById = () => {
@@ -40,8 +37,13 @@ const ItemDetail = () => {
       }, 2000);
     })
   }
+  const onAddQuantity = () => {
 
-  async function fetchPhotos(currentPage,images,nextImages) {
+  }
+  const onAddProduct = () => {
+    addProduct(product)
+  }
+  async function fetchPhotos(currentPage, images, nextImages) {
     try {
       setLoadingImages(true);
 
@@ -104,7 +106,7 @@ const ItemDetail = () => {
               <h2 className='info__product'>Lo que tenés que saber de este producto</h2>
             </div>
             <div>
-              <ProductDetail details={product.infoProducto}/>
+              <ProductDetail details={product.infoProducto} />
             </div>
           </div>
         </div>
@@ -122,14 +124,14 @@ const ItemDetail = () => {
                   <p className='quantity__parraf'>Cantidad: </p>
                 </div>
                 <div>
-                <ItemCount key={product.idProducto} stock={product.stock}></ItemCount>
+                  <ItemCount key={product.idProducto} stock={product.stock}></ItemCount>
                 </div>
                 <div>
                   <span> {product.stock} disponibles</span>
                 </div>
               </div>
               <div>
-                <button className='button__buy'> <span className='button__content'> Comprar ahora </span></button>
+                <button className='button__buy' onClick={onAddProduct}> <span className='button__content'> Comprar ahora </span></button>
               </div>
             </div>
           </div>

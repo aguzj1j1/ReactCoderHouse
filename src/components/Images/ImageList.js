@@ -25,7 +25,7 @@ export function ImageList({
         >
             {images.map((item, i) => {
                 
-                debugger
+                 
                 if (!imageActual.includes(item)) {
                     imageActual.push(item);
                     return (

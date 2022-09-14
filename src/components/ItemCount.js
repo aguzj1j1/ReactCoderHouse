@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Button } from 'react-daisyui'
 const ItemCount = ({stock}) => {
     const [amount, setAmount] = useState(1);
     const addProduct= ()=>{
