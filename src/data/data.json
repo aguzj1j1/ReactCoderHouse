@@ -1,6 +1,6 @@
 [
   {
-    "idProducto": 1,
+    "idProduct": 1,
     "cantidad": 1,
     "price": 30,
     "title": "Dermaglos Crema hidratante día",
@@ -12,7 +12,7 @@
     "src": ["https://www.andromaco.com/Portals/0/images/ecommerce/7793742002922.jpg","https://farmaciazentner.com.ar/wp-content/uploads/2019/05/7793742002915-Pomo.jpg","https://farmalife.vteximg.com.br/arquivos/ids/169871-1200-1200/7793742003264.jpg?v=637357830872270000"]
   },
   {
-    "idProducto": 2,
+    "idProduct": 2,
     "cantidad": 1,
     "price": 5,
     "title": "Dermaglos Crema hidratante Noche",
@@ -24,7 +24,7 @@
     "src": ["https://www.andromaco.com/Portals/0/images/ecommerce/7793742002922.jpg"]
   },
   {
-    "idProducto": 3,
+    "idProduct": 3,
     "cantidad": 1,
     "price": 5,
     "title": "Dermaglos  Protector solar 65",
@@ -36,7 +36,7 @@
     "src": ["https://farmalife.vteximg.com.br/arquivos/ids/169871-1200-1200/7793742003264.jpg?v=637357830872270000"]
   },
   {
-    "idProducto": 4,
+    "idProduct": 4,
     "cantidad": 1,
     "price": 5,
     "title": "Dermaglos  Protector solar 65",

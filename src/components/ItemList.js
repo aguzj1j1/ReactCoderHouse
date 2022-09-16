@@ -24,7 +24,7 @@ const ItemList = () => {
         <>
             <div className="flex flex-wrap">
                 {items.length ? (
-                    items.map((item) => <div className="mt-5"><Item key={item.idProducto} {...item} /> </div>)
+                    items.map((item) => <div className="mt-5"><Item key={item.idProduct} {...item} /> </div>)
                 ) : (
                     <h2>Cargando...</h2>
                 )}

@@ -5,22 +5,23 @@ import { ImageList } from '../Images/ImageList';
 import Stars from './Stars';
 import ProductDetail from './ProductDetail';
 import json from "../../data/data.json"
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ItemCount from '../ItemCount';
 import { CartContext } from '../../context/CartContext';
 const ItemDetail = () => {
   const [initialLoad, setInitialLoad] = useState(true);
   const [loadingImages, setLoadingImages] = useState(false);
+  const [counter, setCounter] = useState(1)
   const [product, setProduct] = useState();
   const [currentPage, setCurrentPage] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
   const [images, setImages] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const { productId } = useParams();
-  const { addProduct } = useContext(CartContext)
+  const { idProduct } = useParams();
+  const { addProduct, isInCart, removeProduct } = useContext(CartContext)
   useEffect(() => {
     getProductById().then((products) => {
-      let actualProduct = products.filter(product => product.idProducto == productId)[0];
+      let actualProduct = products.filter(product => product.idProduct == idProduct)[0];
       setProduct(actualProduct)
       fetchPhotos(1, actualProduct.src, actualProduct.src)
     }).catch(() => {
@@ -37,12 +38,16 @@ const ItemDetail = () => {
       }, 2000);
     })
   }
-  const onAddQuantity = () => {
 
+  const onAdd = (quantity) => {
+    setCounter(quantity);
+    addProduct(product, quantity)
   }
-  const onAddProduct = () => {
-    addProduct(product)
+
+  const remove = () => {
+    removeProduct(product.idProduct)
   }
+
   async function fetchPhotos(currentPage, images, nextImages) {
     try {
       setLoadingImages(true);
@@ -119,19 +124,26 @@ const ItemDetail = () => {
               <div>
                 <p className='stock__disponible'>Stock disponible</p>
               </div>
-              <div className='flex flex-row'>
+              <div className='flex flex-row' style={{ display: isInCart(product.idProduct) ? 'none' : 'block' }}>
                 <div>
                   <p className='quantity__parraf'>Cantidad: </p>
                 </div>
                 <div>
-                  <ItemCount key={product.idProducto} stock={product.stock}></ItemCount>
+                  <ItemCount key={product.idProduct} stock={product.stock} onAdd={onAdd}></ItemCount>
                 </div>
                 <div>
                   <span> {product.stock} disponibles</span>
                 </div>
               </div>
-              <div>
-                <button className='button__buy' onClick={onAddProduct}> <span className='button__content'> Comprar ahora </span></button>
+              <div className='flex flex-row' style={{ display: isInCart(product.idProduct) ? 'block' : 'none' }}>
+                <div>
+                  <Link to="/cart">
+                    <button className='button__buy' > <span className='button__content'> Ir al carrito </span></button>
+                  </Link>
+                </div>
+                <div>
+                  <button className='button__buy' onClick={remove}> <span className='button__content'>Eliminar del carrito </span></button>
+                </div>
               </div>
             </div>
           </div>
