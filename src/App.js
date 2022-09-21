@@ -4,8 +4,10 @@ import { CartProvider } from './context/CartContext';
 import NavBar from './components/NavBar.js'
 import ItemListContainer from './components/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetail/ItemDetailContainer'
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Cart from './components/cart/Cart';
+
 
 function App() {
   return (

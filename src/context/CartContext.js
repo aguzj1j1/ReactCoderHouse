@@ -1,9 +1,10 @@
+import src from "daisyui";
 import React, { createContext, useState } from "react";
 export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [item, setItem] = useState([]);
     const addProduct = (product, quantity) => {
-        const actualProduct = { idProduct: product.idProduct, price: product.price, quantity: quantity }
+        const actualProduct = { idProduct: product.idProduct, price: product.price, quantity: quantity,src:product.src,title:product.title,description:product.description }
         if (!isInCart(actualProduct.idProduct)) {
             setItem(old => [...old, actualProduct])
         } else {
@@ -19,6 +20,15 @@ export const CartProvider = ({ children }) => {
     const clear = () => {
         setItem([])
     }
+
+    const totalCart = () => {
+        let total = 0;
+        item.forEach(actual => {
+             actual.quantity>1 ? total += (actual.quantity*actual.price) : total += actual.price
+        })
+        return total;
+    }
+
     const isInCart = (idProduct) => {
         return item.some(x => x.idProduct === idProduct)
     }
@@ -29,8 +39,12 @@ export const CartProvider = ({ children }) => {
         })
         return quantity;
     }
+    const getProducts = () => {
 
-    return (<CartContext.Provider value={{ item, addProduct, getQuantity,isInCart,removeProduct}}>
+        return item;
+    }
+
+    return (<CartContext.Provider value={{ item,addProduct, getQuantity, isInCart, removeProduct,getProducts,totalCart }}>
         {children}
     </CartContext.Provider>)
 }

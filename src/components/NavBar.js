@@ -3,10 +3,8 @@ import CartWidget from "./CartWidget";
 import ListNavBar from "./ListNavBar";
 import { Link } from 'react-router-dom';
 
-import {CartContext} from '../context/CartContext';
 
 function NavBar() {
-    const {item} = useContext(CartContext)
     return (<>
         <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
             <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -26,7 +24,7 @@ function NavBar() {
                         <ListNavBar url="#" name="Carreras" />
                         <ListNavBar url="#" name="Calendario" />
                         <ListNavBar url="#" name="Nosotros" />
-                        <CartWidget />
+                        <Link to="/cart"> <CartWidget /> </Link>
                     </ul>
                 </div>
             </div>
