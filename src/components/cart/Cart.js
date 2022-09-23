@@ -33,7 +33,7 @@ const Cart = () => {
 
 
                   {products.length ? (
-                    products.map((item) => <ProductCart key={item.idProduct} {...item} />)
+                    products.map((item) => <ProductCart key={item.id} {...item} />)
                   ) : (
                     <h2>No hay productos en el carrito...</h2>
                   )}

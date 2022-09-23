@@ -1,30 +1,19 @@
 import { useEffect, useState } from "react"
 import Item from "./Item"
-import json from "../data/data.json"
+import { getAllProducts } from "./firebase/FirebaseServices"
 const ItemList = () => {
     const [items, setItems] = useState([]);
-
     useEffect(() => {
-        const getProducts = () => {
-            const products = JSON.parse(JSON.stringify(json))
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    products.length > 0 ? resolve(products) : reject("no se pudo cargar los productos")
-                }, 2000);
-            })
-        }
-        getProducts().then((products) => {
+        getAllProducts().then((products) => {
             setItems(products)
-            console.log(items)
-        }).catch(() => {
-            console.log("fallo la promesa")
+            console.log(products)
         })
     }, [])
     return (
         <>
             <div className="flex flex-wrap">
                 {items.length ? (
-                    items.map((item) => <div className="mt-5"><Item key={item.idProduct} {...item} /> </div>)
+                    items.map((item) => <div className="mt-5"><Item key={item.id} {...item} /> </div>)
                 ) : (
                     <h2>Cargando...</h2>
                 )}

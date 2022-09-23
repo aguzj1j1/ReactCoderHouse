@@ -4,10 +4,10 @@ import { Carousel } from '../Images/Carousel';
 import { ImageList } from '../Images/ImageList';
 import Stars from './Stars';
 import ProductDetail from './ProductDetail';
-import json from "../../data/data.json"
 import { Link, useParams } from 'react-router-dom';
 import ItemCount from '../ItemCount';
 import { CartContext } from '../../context/CartContext';
+import { getProductById } from "../firebase/FirebaseServices"
 const ItemDetail = () => {
   const [initialLoad, setInitialLoad] = useState(true);
   const [loadingImages, setLoadingImages] = useState(false);
@@ -17,27 +17,16 @@ const ItemDetail = () => {
   const [totalPages, setTotalPages] = useState(null);
   const [images, setImages] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const { idProduct } = useParams();
+  const {id} = useParams();
   const { addProduct, isInCart, removeProduct } = useContext(CartContext)
   useEffect(() => {
-    getProductById().then((products) => {
-      let actualProduct = products.filter(product => product.idProduct == idProduct)[0];
-      setProduct(actualProduct)
-      fetchPhotos(1, actualProduct.src, actualProduct.src)
-    }).catch(() => {
-      console.log("fallo la promesa")
-    })
+    getProductById(id).then((actualProduct) => {
+      setProduct(...actualProduct)
+      fetchPhotos(1, actualProduct[0].src, actualProduct[0].src)
+    });
 
   }, []);
 
-  const getProductById = () => {
-    const products = JSON.parse(JSON.stringify(json))
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        products.length > 0 ? resolve(products) : reject("no se pudo cargar los productos")
-      }, 2000);
-    })
-  }
 
   const onAdd = (quantity) => {
     setCounter(quantity);
@@ -45,7 +34,7 @@ const ItemDetail = () => {
   }
 
   const remove = () => {
-    removeProduct(product.idProduct)
+    removeProduct(product.id)
   }
 
   async function fetchPhotos(currentPage, images, nextImages) {
@@ -124,18 +113,18 @@ const ItemDetail = () => {
               <div>
                 <p className='stock__disponible'>Stock disponible</p>
               </div>
-              <div className='flex flex-row' style={{ display: isInCart(product.idProduct) ? 'none' : 'block' }}>
+              <div className='flex flex-row' style={{ display: isInCart(product.id) ? 'none' : 'block' }}>
                 <div>
                   <p className='quantity__parraf'>Cantidad: </p>
                 </div>
                 <div>
-                  <ItemCount key={product.idProduct} stock={product.stock} onAdd={onAdd}></ItemCount>
+                  <ItemCount key={product.id} stock={product.stock} onAdd={onAdd}></ItemCount>
                 </div>
                 <div>
                   <span> {product.stock} disponibles</span>
                 </div>
               </div>
-              <div className='flex flex-row' style={{ display: isInCart(product.idProduct) ? 'block' : 'none' }}>
+              <div className='flex flex-row' style={{ display: isInCart(product.id) ? 'block' : 'none' }}>
                 <div>
                   <Link to="/cart">
                     <button className='button__buy' > <span className='button__content'> Ir al carrito </span></button>
