@@ -22,3 +22,12 @@ export const getProductById = (id) => {
         return [...products]
     })
 }
+export const getProductByCategory = (category) => {
+    let products;
+    const db = getFirestore()
+    const productQuery =  query(collection(db, "products"),where("categoria","==",category));
+    return getDocs(productQuery).then((snapshot)=>{
+        products = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        return products
+    })
+}
