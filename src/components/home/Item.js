@@ -1,5 +1,4 @@
 import { Card, Button } from 'react-daisyui'
-import ItemCount from './ItemCount'
 import { Link } from 'react-router-dom'
 const Item = ({ src, title, description, price, stock,  id }) => {
   return (

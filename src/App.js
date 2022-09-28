@@ -1,13 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 import { CartProvider } from './context/CartContext';
-import NavBar from './components/NavBar.js'
-import ItemListContainer from './components/ItemListContainer'
-import ItemDetailContainer from './components/ItemDetail/ItemDetailContainer'
-
+import NavBar from './components/nav/NavBar'
+import ItemListContainer from './components/home/ItemListContainer'
+import ItemDetailContainer from './components/itemDetail/ItemDetailContainer'
+import { PageProvider } from './context/PageContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Cart from './components/cart/Cart';
 import { initializeApp } from "firebase/app";
+import CheckOut from './components/checkout/CheckOut';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDjg5A8hwqcfruI2pCM-hhhAO2s9r_ZDc4",
@@ -26,15 +27,14 @@ function App() {
     <>
       <CartProvider>
         <BrowserRouter>
-
-          <NavBar/>
+          <NavBar />
           <Routes>
             <Route exact path="/" element={<ItemListContainer />} />
             <Route exact path="/categorys/:id" element={<ItemListContainer />} />
             <Route exact path="/product/:id" element={<ItemDetailContainer />} />
-            <Route exact path="/cart" element={<Cart/>} />
+            <Route exact path="/cart" element={<Cart />} />
+            <Route exact path="/checkout" element={<PageProvider><CheckOut /></PageProvider>} />
           </Routes>
-
         </BrowserRouter>
       </CartProvider>
 

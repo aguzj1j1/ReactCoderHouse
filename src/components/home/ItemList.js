@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Item from "./Item"
-import { getAllProducts, getProductByCategory } from "./firebase/FirebaseServices"
+import { getAllProducts, getProductByCategory } from "../firebase/FirebaseServices"
 const ItemList = ({ categorys = null }) => {
     const [items, setItems] = useState([]);
     useEffect(() => {

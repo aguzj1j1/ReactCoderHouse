@@ -1,0 +1,4 @@
+.inputs-center {
+    display: grid;
+    place-items: center;
+}

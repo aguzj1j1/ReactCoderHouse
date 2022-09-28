@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './ItemDetail.css'
-import { Carousel } from '../Images/Carousel';
-import { ImageList } from '../Images/ImageList';
+import { Carousel } from '../images/Carousel';
+import { ImageList } from '../images/ImageList';
 import Stars from './Stars';
 import ProductDetail from './ProductDetail';
 import { Link, useParams } from 'react-router-dom';
-import ItemCount from '../ItemCount';
+import ItemCount from './ItemCount';
 import { CartContext } from '../../context/CartContext';
 import { getProductById } from "../firebase/FirebaseServices"
 const ItemDetail = () => {
