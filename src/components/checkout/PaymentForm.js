@@ -1,11 +1,13 @@
-import { InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { FormControl, TextField } from '@mui/material';
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
-import Cards from "react-credit-cards";
+import Card from "react-credit-cards";
 import 'react-credit-cards/es/styles-compiled.css';
+import { PageContext } from '../../context/PageContext';
 
 const PaymentForm = () => {
+    const { page,onBackPage } = useContext(PageContext)
     const [cvc, setCvc] = useState("")
     const [expiry, setExpiry] = useState("")
     const [age, setAge] = useState("")
@@ -24,93 +26,115 @@ const PaymentForm = () => {
     const handleNumberChange = (e) => {
         setNumber(e.target.value)
     }
-    const handleMonthChange = (e) => {
-        setMonth(e.target.value);
-    }
-    const handleAgeChange = (e) => {
-        setAge(e.target.value)
+ 
+    const handleExpiryChange = (e) => {
         setExpiry(month + e.target.value);
     }
     const handleCvcChange = (e) => {
         setCvc(e.target.value)
         setFocus(e.target.name)
     }
+    const saveOrder = () => {
+        
+    }
     return (
-        <div className='rccs__card '>
-            <Cards
-                name={name}
-                number={number}
-                expiry={expiry}
-                cvc={cvc}
-                focus={focus}
-            />
-            <form>
-                <TextField
-                    id="outlined-basic"
-                    type="tel"
-                    name="Number"
-                    onChange={handleNumberChange}
-                    onFocus={handleInputFocus}
-                    label="Numero"
-                    variant="outlined"
+        <>
+            <div className='rccs__card  mt-20'>
+                <Card key="1"
+                    name={name}
+                    number={number}
+                    expiry={expiry}
+                    cvc={cvc}
+                    focus={focus}
+                    className="mt-10"
                 />
-                <TextField
-                    type="text"
-                    className="form-control"
-                    value={name}
-                    name="name"
-                    onChange={handleNameChange}
-                    onFocus={handleInputFocus}
-                    label="Nombre"
-                    variant="outlined"
-                />
-                <TextField
-                    type="text"
-                    className="form-control"
-                    value={cvc}
-                    name="cvc"
-                    onChange={handleCvcChange}
-                    onFocus={handleInputFocus}
-                    label="Cvc"
-                    variant="outlined"
-                    pattern="\d*"
-                    maxLength="3"
-                />
-                <FormControl sx={{ m: 1 }} variant="standard">
-                    <InputLabel id="demo-customized-select-label">Mes</InputLabel>
-                    <Select
-                        labelId="demo-customized-select-label"
-                        id="demo-customized-select"
-                        value={month}
-                        name="Month"
-                        onChange={handleMonthChange}
-                        onFocus={handleInputFocus}
+            </div>
+            <form className='mt-20'>
+                <div className='flex flex-row '>
+                    <div className='w-3/5'>
+                        <TextField 
+                            key={2}
+                            id="outlined-basic"
+                            type="tel"
+                            name="Number"
+                            onChange={handleNumberChange}
+                            onFocus={handleInputFocus}
+                            label="Numero"
+                            variant="outlined"
+                        />
+                    </div>
+                    <div className='w-3/5'>
+                        <TextField
+                            key={3}
+                            type="text"
+                            className="form-control"
+                            value={name}
+                            name="name"
+                            onChange={handleNameChange}
+                            onFocus={handleInputFocus}
+                            label="Nombre"
+                            variant="outlined"
+                        />
+                    </div>
+                </div>
+                <div className='flex flex-row mt-5'>
+                    <div className='w-3/5'>
+                        <TextField
+                            key={4}
+                            type="text"
+                            className="form-control"
+                            value={cvc}
+                            name="cvc"
+                            onChange={handleCvcChange}
+                            onFocus={handleInputFocus}
+                            label="Cvc"
+                            variant="outlined"
+                            pattern="\d*"
+                            maxLength="3"
+                        />
+                    </div>
+                    <div className='w-3/5'>
+                        <TextField
+                            key={4}
+                            type="text"
+                            className="form-control"
+                            value={expiry}
+                            name="cvc"
+                            onChange={handleExpiryChange}
+                            onFocus={handleInputFocus}
+                            label="Fecha expiracion mm/dd"
+                            variant="outlined"
+                            pattern="\d*"
+                            maxLength="4"
+                        />
+                    </div>
+                
+                    
+                </div>
+                <div className="flex flex-wrap">
+                <div className="w-32  md:w-2/5 md:h-14">
+                    <Button
+                        style={{ margin: 25 }}
+                        onClick={onBackPage}
                     >
+                    Volver a datos de envio                        
+                    </Button>
+                </div>
+                <div className="grow-0 md:grow  h-14 ...">
 
-                        {months.map(mon => <MenuItem value={mon}>{mon}</MenuItem>)}
-
-                    </Select>
-                </FormControl>
-                <FormControl sx={{ m: 1 }} variant="standard">
-                    <InputLabel id="demo-customized-select-label">Año</InputLabel>
-                    <Select
-                        labelId="demo-customized-select-label"
-                        id="demo-customized-select"
-                        value={age}
-                        name="Age"
-                        onChange={handleAgeChange}
-                        onFocus={handleInputFocus}
+                </div>
+                <div className='w-32  md:2/5 md:h-14'>
+                    <Button
+                        // onClick={nextPage}
+                        style={{ margin: 25 }}
                     >
-                        <MenuItem value={ages[0]}>
-                            <em>{ages[0]}</em>
-                        </MenuItem>
-                        {ages.map(age => <MenuItem value={age}>{age}</MenuItem>)}
+                        Terminar orden
+                    </Button>
+                </div>
 
-                    </Select>
-                </FormControl>
-
+            </div>
             </form>
-        </div>
+        </>
     )
 }
 

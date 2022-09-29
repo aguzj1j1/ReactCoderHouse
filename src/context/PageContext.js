@@ -4,9 +4,9 @@ export const PageProvider = ({ children }) => {
     const [people,setPeople] = useState(null)
     const [shipping,setShipping] = useState(null)
     const steps = [
-        { title: "Tus datos" },
-        { title: "Datos de envio" },
-        { title: "Pagos" },
+        { id:1,title: "Tus datos" },
+        { id:2,title: "Datos de envio" },
+        { id:3,title: "Pagos" },
     ];
     const [page, setPage] = useState(0)
     const onNextPage = () => {

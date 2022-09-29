@@ -59,6 +59,7 @@ const BuyerForm = () => {
                         value={people === null ? lastName : people.lastName}
                     />
                 </div>
+                
                 <div className='w-1/2'>
                     <TextField
                         label="Tipo"
