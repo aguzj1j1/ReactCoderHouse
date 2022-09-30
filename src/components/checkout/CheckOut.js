@@ -14,7 +14,7 @@ const CheckOut = () => {
 
     return (
         <>
-            <div className='inputs-center' style={{ display: soldOut ? 'none' : 'block' }}>
+            <div className='inputs-center' style={{ visibility: soldOut ? 'hidden' : 'visible' }}>
                 {page !== 5 && (
                     <Stepper steps={steps} activeStep={page} />
                 )}
@@ -23,7 +23,7 @@ const CheckOut = () => {
                 {page === 2 && <PaymentForm key={3} />}
 
             </div>
-            <div className='inputs-center' style={{ display: soldOut ? 'block' : 'none' }}>
+            <div className='inputs-center' style={{ visibility: soldOut ? 'visible' : 'hidden' }}>
                 <h1> acá va la logica de cuando ya compro mostrar algo</h1>
             </div>
         </>
