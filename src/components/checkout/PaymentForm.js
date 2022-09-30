@@ -5,18 +5,18 @@ import { useState } from 'react';
 import Card from "react-credit-cards";
 import 'react-credit-cards/es/styles-compiled.css';
 import { PageContext } from '../../context/PageContext';
-
+import { CartContext } from '../../context/CartContext';
+import { postOrder } from '../firebase/FirebaseServices'
 const PaymentForm = () => {
-    const { page,onBackPage } = useContext(PageContext)
+    const { page, onBackPage, people, shipping, sold } = useContext(PageContext)
+    const { item, totalCart } = useContext(CartContext)
     const [cvc, setCvc] = useState("")
     const [expiry, setExpiry] = useState("")
-    const [age, setAge] = useState("")
     const [month, setMonth] = useState("")
     const [focus, setFocus] = useState("")
     const [name, setName] = useState("")
     const [number, setNumber] = useState("")
-    const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-    const ages = ["22", "23", "24", "25", "26", "27", "28", "29", "30"]
+
     const handleInputFocus = (e) => {
         setFocus(e.target.name)
     }
@@ -26,7 +26,7 @@ const PaymentForm = () => {
     const handleNumberChange = (e) => {
         setNumber(e.target.value)
     }
- 
+
     const handleExpiryChange = (e) => {
         setExpiry(month + e.target.value);
     }
@@ -35,7 +35,27 @@ const PaymentForm = () => {
         setFocus(e.target.name)
     }
     const saveOrder = () => {
-        
+        if (validateInputs()) {
+            let total = totalCart();
+            const order = {
+                buyer: people,
+                shipping: shipping,
+                items: item,
+                total: total
+            }
+            postOrder(order)
+            debugger;
+            sold()
+
+        }
+
+    }
+    const validateInputs = () => {
+        if (cvc == "") return false
+        if (expiry == "") return false
+        if (name == "") return false
+        if (number == "") return false
+        return true
     }
     return (
         <>
@@ -52,7 +72,7 @@ const PaymentForm = () => {
             <form className='mt-20'>
                 <div className='flex flex-row '>
                     <div className='w-3/5'>
-                        <TextField 
+                        <TextField
                             key={2}
                             id="outlined-basic"
                             type="tel"
@@ -108,31 +128,31 @@ const PaymentForm = () => {
                             maxLength="4"
                         />
                     </div>
-                
-                    
+
+
                 </div>
                 <div className="flex flex-wrap">
-                <div className="w-32  md:w-2/5 md:h-14">
-                    <Button
-                        style={{ margin: 25 }}
-                        onClick={onBackPage}
-                    >
-                    Volver a datos de envio                        
-                    </Button>
-                </div>
-                <div className="grow-0 md:grow  h-14 ...">
+                    <div className="w-32  md:w-2/5 md:h-14">
+                        <Button
+                            style={{ margin: 25 }}
+                            onClick={onBackPage}
+                        >
+                            Volver a datos de envio
+                        </Button>
+                    </div>
+                    <div className="grow-0 md:grow  h-14 ...">
+
+                    </div>
+                    <div className='w-32  md:2/5 md:h-14'>
+                        <Button
+                            onClick={saveOrder}
+                            style={{ margin: 25 }}
+                        >
+                            Terminar orden
+                        </Button>
+                    </div>
 
                 </div>
-                <div className='w-32  md:2/5 md:h-14'>
-                    <Button
-                        // onClick={nextPage}
-                        style={{ margin: 25 }}
-                    >
-                        Terminar orden
-                    </Button>
-                </div>
-
-            </div>
             </form>
         </>
     )

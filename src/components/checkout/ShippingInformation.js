@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { PageContext } from '../../context/PageContext'
 
 const ShippingInformation = () => {
-    const { page, onNextPage, onBackPage } = useContext(PageContext)
+    const { page, onNextPage, onBackPage,createShipping,shipping } = useContext(PageContext)
     const [direction, setDirection] = useState("");
     const [city, setCity] = useState("");
     const [province, setProvince] = useState("");
@@ -33,6 +33,14 @@ const ShippingInformation = () => {
     const handleChangeCountry = (event) => {
         setcountry(event.target.value)
     }
+    const createPeople = () => {
+        const people = mappingShippingInformation();
+        createShipping(people);
+        nextPage()
+    }
+    const mappingShippingInformation = () => {
+        return {direction:direction,postalCode:postalCode,city:city,province:province,contry:country}
+    }
     return (
         <form>
             <h4 className='inputs-center'> Tus datos</h4>
@@ -45,7 +53,7 @@ const ShippingInformation = () => {
                         margin="normal"
                         required
                         onChange={handleChangeDirection}
-                        value={direction}
+                        value= {shipping === null ? direction : shipping.direction}
                     />
                 </div>
                
@@ -57,7 +65,7 @@ const ShippingInformation = () => {
                         margin="normal"
                         required
                         onChange={handleChangeCodPostal}
-                        value={postalCode}
+                        value={shipping === null ? postalCode : shipping.postalCode} 
                     />
                 </div>
                 <div className='w-1/2'>
@@ -68,7 +76,7 @@ const ShippingInformation = () => {
                         margin="normal"
                         required
                         onChange={handleChangeCity}
-                        value={city}
+                        value={shipping === null ? city : shipping.city} 
                     />
                 </div>
                 <div className='w-1/2'>
@@ -79,7 +87,7 @@ const ShippingInformation = () => {
                         margin="normal"
                         required
                         onChange={handleChangeProvince}
-                        value={province}
+                        value= {shipping === null ? province : shipping.province} 
                     />
                 </div>
                 <div className='w-1/2'>
@@ -90,7 +98,7 @@ const ShippingInformation = () => {
                         margin="normal"
                         required
                         onChange={handleChangeCountry}
-                        value={country}
+                        value= {shipping === null ? country : shipping.country} 
                     />
                 </div>
             </div>
@@ -108,7 +116,7 @@ const ShippingInformation = () => {
                 </div>
                 <div className='w-32  md:2/5 md:h-14'>
                     <Button
-                        onClick={nextPage}
+                        onClick={createPeople}
                         style={{ margin: 25 }}
                     >
                         Siguiente

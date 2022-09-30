@@ -1,4 +1,5 @@
-import { collection, getDocs, getFirestore, doc, getDoc, query, where, documentId } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where, documentId, addDoc } from "firebase/firestore";
+
 
 
 export const getAllProducts = () => {
@@ -32,11 +33,13 @@ export const getProductByCategory = (category) => {
     })
 }
 
-export const postOrder = (category) => {
-    // const db = getFirestore()
-    // const orderCollection = collection(db, 'orders')
+export const postOrder = (order) => {
+    console.log(order)
+    const db = getFirestore()
+    const orderCollection = collection(db, 'orders')
+    addDoc(orderCollection, order).then((id) => {
+       return id;
+    })
+  
 
-    // addDoc(orderCollection, order).then(({ id }) => {
-    //     console.log({ id });
-    // })
 }

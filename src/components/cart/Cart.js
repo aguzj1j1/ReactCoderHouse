@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { CartContext } from "../../context/CartContext"
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const { getProducts, item,totalCart } = useContext(CartContext)
+  const { getProducts, item, totalCart } = useContext(CartContext)
 
   const getProductsCart = () => {
     let actualCart = getProducts();
@@ -41,8 +41,8 @@ const Cart = () => {
                     <div className="flex flex-col items-center">
                       <div>
                         <Link to="/"> <span className="text-md  font-medium text-blue-500">Continuar comprando</span></Link>
-                      </div>                      
-                      
+                      </div>
+
                     </div>
 
                     <div className="flex justify-center items-end">
@@ -52,7 +52,13 @@ const Cart = () => {
                     </div>
 
                   </div>
-
+                  <div className="flex justify-between items-center mt-6 pt-6 border-t">
+                    <div className="flex justify-center place-items-end">
+                      <div>
+                        <Link to="/checkout"> <span className="text-md  font-medium text-blue-500">Comprar</span></Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
