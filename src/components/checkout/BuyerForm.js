@@ -45,6 +45,7 @@ const BuyerForm = () => {
                         margin="normal"
                         required
                         onChange={handleChangeName}
+                        pattern="[a-z]"
                         value={people === null ? name : people.name}
                     />
                 </div>
@@ -56,6 +57,7 @@ const BuyerForm = () => {
                         margin="normal"
                         required
                         onChange={handleChangeLastName}
+                        pattern="[a-z]"
                         value={people === null ? lastName : people.lastName}
                     />
                 </div>
@@ -79,6 +81,7 @@ const BuyerForm = () => {
                         margin="normal"
                         required
                         onChange={handleChangeDni}
+                        pattern="^[0-9]*$"
                         value={people === null ? dni : people.dni}
                     />
                 </div>
