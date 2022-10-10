@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ReactCoderHouse/static/css/main.b1248bfb.css",
+    "main.js": "/ReactCoderHouse/static/js/main.ebb57865.js",
+    "static/js/787.287d422e.chunk.js": "/ReactCoderHouse/static/js/787.287d422e.chunk.js",
+    "index.html": "/ReactCoderHouse/index.html",
+    "static/media/index.cjs": "/ReactCoderHouse/static/media/index.cd351d7c31d0d3fccf96.cjs",
+    "main.b1248bfb.css.map": "/ReactCoderHouse/static/css/main.b1248bfb.css.map",
+    "main.ebb57865.js.map": "/ReactCoderHouse/static/js/main.ebb57865.js.map",
+    "787.287d422e.chunk.js.map": "/ReactCoderHouse/static/js/787.287d422e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1248bfb.css",
+    "static/js/main.ebb57865.js"
+  ]
+}
